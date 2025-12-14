@@ -1,5 +1,14 @@
 package org.anisa;
 
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
+@ToString
+@EqualsAndHashCode
+@Getter
+@Setter
 public class Address {
     private int streetNo;
     private String street;
@@ -25,7 +34,7 @@ public class Address {
             }
         }
 
-    return true;
+        return true;
     }
 
     public Address(int streetNo, String street, String city, Province province, String postalCode) {
