@@ -10,8 +10,10 @@ public class Department {
             return false;
         }
 
-        if (!Character.isLetter(c) && c != ' ') {
-            return false;
+        for (char c : departmentName.toCharArray()) {
+            if (!Character.isLetter(c) && c != ' ') {
+                return false;
+            }
         }
 
         return true;
