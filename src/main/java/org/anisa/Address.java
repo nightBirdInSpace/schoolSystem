@@ -7,5 +7,4 @@ public class Address {
     private Province province;
     private String postalCode;
 
-
 }
