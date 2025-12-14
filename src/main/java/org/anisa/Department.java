@@ -1,7 +1,16 @@
 package org.anisa;
 
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
+@ToString
+@EqualsAndHashCode
+@Getter
 public class Department {
-    private String departmentId;
+    private final String departmentId;
+    @Setter
     private String departmentName;
     private int nextId = 1;
 
@@ -15,6 +24,7 @@ public class Department {
                 return false;
             }
         }
+
         return true;
     }
 
