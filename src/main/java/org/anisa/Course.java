@@ -17,7 +17,7 @@ public class Course {
     private Department department;
     private ArrayList<Assignment>  assignments;
     private ArrayList<Student> registeredStudents;
-    private static int nextId;
+    private static int nextId = 1;
 
     public Course(String courseName, double credits, Department department) {
         String twoDigitCourseId = String.format("%02d", nextId++);
@@ -32,14 +32,14 @@ public class Course {
     public boolean isAssignmentWeightValid() {
         double sumWeight = 0;
 
-        for (int h = 0; h < assignments.size(); h++) {
-            sumWeight += assignments.get(h).getWeight();
+        for (Assignment assignment : assignments) {
+            sumWeight += assignment.getWeight();
         }
 
         return Math.abs(sumWeight - 100) < 0.001;
     }
 
-    public boolean registeredStudent(Student student) {
+    public boolean registerStudent(Student student) {
         if (student == null || registeredStudents.contains(student)) {
             return false;
         }
@@ -50,10 +50,6 @@ public class Course {
             assignment.getScores().add(null);
         }
 
-        for (Assignment assignment : assignments) {
-            assignment.calcAssignmentAvg().add(null);
-        }
-
         return true;
     }
 
@@ -61,7 +57,7 @@ public class Course {
         int numStudents = registeredStudents.size();
 
         if (numStudents == 0) {
-            return new int[];
+            return new int[0];
         }
 
         int[] averages  = new int[numStudents];
@@ -104,7 +100,34 @@ public class Course {
     }
 
     public void displayScores() {
+        System.out.println("--- Course Assignments & Weights ---");
 
+        for (Assignment a : assignments) {
+            System.out.printf("%s: %.1f%%\n", a.getAssignmentId(), a.getWeight());
+        }
+
+        System.out.println("----------------------------------");
+
+        System.out.println("--- Student Scores ---");
+        int[] finalScore = calcStudentsAverage();
+
+        for (int m = 0; m < registeredStudents.size(); m++) {
+            System.out.println("Student: " + registeredStudents.get(m).toSimplifiedString());
+
+            for (Assignment a : assignments) {
+                Integer score = a.getScores().get(m);
+                System.out.printf("  - %s Score: %s\n", a.getAssignmentId(), score);
+            }
+
+            System.out.printf("  - FINAL Average: %s\n", calcAssignmentAvg());
+            System.out.println();
+        }
+
+        System.out.println("--- Assignment Averages ---");
+
+        for (Assignment a : assignments) {
+            System.out.printf("%s Average: %.2f\n", a.getAssignmentId(), calcAssignmentAvg());
+        }
     }
 
     public String toSimplifiedString() {
