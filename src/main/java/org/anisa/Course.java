@@ -21,5 +21,13 @@ public class Course {
         this.registeredStudents = new ArrayList<>();
     }
 
+    public boolean isAssignmentWeightValid() {
+        double sumWeight = 0;
 
+        for (int i = 0; i < assignments.size(); i++) {
+            sumWeight += assignments.get(i).getWeight();
+        }
+
+        return Math.abs(sumWeight - 100) < 0.001;
+    }
 }
