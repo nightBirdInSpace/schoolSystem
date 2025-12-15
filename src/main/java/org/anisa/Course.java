@@ -87,4 +87,12 @@ public class Course {
 
         return true;
     }
+
+    public void generateScores() {
+        for (Assignment assignment : assignments) {
+            assignment.generateRandomScores();
+        }
+
+        calcStudentsAverage();
+    }
 }
