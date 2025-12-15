@@ -1,8 +1,15 @@
 package org.anisa;
 
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
+
 import java.util.ArrayList;
 import java.util.List;
 
+@EqualsAndHashCode
+@Getter
+@Setter
 public class Course {
     private String courseId;
     private String courseName;
@@ -94,5 +101,25 @@ public class Course {
         }
 
         calcStudentsAverage();
+    }
+
+    public void displayScores() {
+
+    }
+
+    public String toSimplifiedString() {
+        return String.format("%s | %s | %.1f Credits | %s", courseId, courseName, credits, department.getDepartmentName());
+    }
+
+    @Override
+    public String toString() {
+        return "Course{" +
+                "courseId='" + courseId + '\'' +
+                ", courseName='" + courseName + '\'' +
+                ", department=" + department.getDepartmentName() +
+                ", assignments=" + assignments +
+                ", registeredStudents=" + registeredStudents +
+                ", isAssignmentWeightValid=" + isAssignmentWeightValid() +
+                '}';
     }
 }
