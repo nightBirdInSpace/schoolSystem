@@ -10,7 +10,6 @@ import lombok.ToString;
 @Getter
 public class Department {
     private final String departmentId;
-    @Setter
     private String departmentName;
     private int nextId = 1;
 
@@ -30,11 +29,15 @@ public class Department {
 
     public Department(String departmentName) {
         if (isDepartmentNameValid(departmentName)) {
-            this.departmentName = departmentName;
+            this.departmentName = Util.toTitleCase(departmentName);
             this.departmentId = String.format("D%02d", nextId++);
         } else {
             this.departmentName = null;
             this.departmentId = null;
         }
+    }
+
+    public void setDepartmentName(String departmentName) {
+        this.departmentName = Util.toTitleCase(departmentName);
     }
 }

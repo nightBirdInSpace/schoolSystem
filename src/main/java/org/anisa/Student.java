@@ -34,7 +34,7 @@ public class Student {
 
         registeredCourses.add(course);
 
-        course.registeredStudent(this);
+        course.registerStudent(this);
 
         return true;
     }
