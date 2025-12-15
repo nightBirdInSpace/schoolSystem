@@ -1,6 +1,7 @@
 package org.anisa;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Course {
     private String courseId;
@@ -24,8 +25,8 @@ public class Course {
     public boolean isAssignmentWeightValid() {
         double sumWeight = 0;
 
-        for (int i = 0; i < assignments.size(); i++) {
-            sumWeight += assignments.get(i).getWeight();
+        for (int h = 0; h < assignments.size(); h++) {
+            sumWeight += assignments.get(h).getWeight();
         }
 
         return Math.abs(sumWeight - 100) < 0.001;
@@ -47,5 +48,32 @@ public class Course {
         }
 
         return true;
+    }
+
+    public int[] calcStudentsAverage() {
+        int numStudents = registeredStudents.size();
+
+        if (numStudents == 0) {
+            return new int[];
+        }
+
+        int[] averages  = new int[numStudents];
+        for (int k = 0; k < numStudents; k++) {
+            double weightedSum = 0;
+
+            for (Assignment assignment : assignments) {
+                List<Integer> scores = assignment.getScores();
+                if (k < scores.size() && scores.get(k) != null) {
+                    double score = scores.get(k);
+                    double weight = assignment.getWeight();
+                    weightedSum += (weight * score / 100);
+                }
+            }
+
+            int finalAvg = (int) Math.round(weightedSum);
+            averages[k] = finalAvg;
+        }
+
+        return averages;
     }
 }
