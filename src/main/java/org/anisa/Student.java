@@ -1,11 +1,18 @@
 package org.anisa;
 
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
+
 import java.util.ArrayList;
 
+@EqualsAndHashCode
+@Getter
+@Setter
 public class Student {
-    private String studentId;
+    private final String studentId;
     private String studentName;
-    private Gender gender;
+    private final Gender gender;
     private Address address;
     private Department department;
     private ArrayList<Course> registeredCourses;
@@ -20,7 +27,7 @@ public class Student {
         this.registeredCourses = new ArrayList<>();
     }
 
-    public boolean registerCourse (Course course) {
+    public boolean registeredCourse (Course course) {
         if (couse == null || registeredCourses.contains(course)) {
             return false;
         }
@@ -44,5 +51,24 @@ public class Student {
         if (studentIndex != -1) {
             course.getRegisteredStudents().remove(studentIndex);
         }
+
+        return true;
+    }
+
+    public String toSimplifiedString() {
+        String deptName = department != null && department.getDepartmentName() != null ? department.getDepartmentName() : "no answer";
+        return String.format("%s | %s | %s", studentId, studentName, deptName);
+    }
+
+    @Override
+    public String toString() {
+        return "Student{" +
+                "studentId='" + studentId + '\'' +
+                ", studentName='" + studentName + '\'' +
+                ", gender=" + gender +
+                ", address=" + address +
+                ", department=" + department +
+                ", registeredCourses=" + registeredCourses +
+                '}';
     }
 }
