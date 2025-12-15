@@ -28,7 +28,7 @@ public class Student {
     }
 
     public boolean registeredCourse (Course course) {
-        if (couse == null || registeredCourses.contains(course)) {
+        if (course == null || registeredCourses.contains(course)) {
             return false;
         }
 
