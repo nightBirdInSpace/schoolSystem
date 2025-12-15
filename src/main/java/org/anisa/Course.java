@@ -76,4 +76,15 @@ public class Course {
 
         return averages;
     }
+
+    public boolean addAssignment(String assignmentName, double weight, int maxScore) {
+        Assignment newAssignment = new Assignment(assignmentName, weight);
+        assignments.add(newAssignment);
+
+        for (int l = 0; l < registeredStudents.size(); l++) {
+            newAssignment.getScores().add(null);
+        }
+
+        return true;
+    }
 }
