@@ -1,8 +1,13 @@
 package org.anisa;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.util.ArrayList;
 import java.util.Random;
 
+@Getter
+@Setter
 public class Assignment {
     private String assignmentId;
     private String assignmentName;
@@ -29,7 +34,7 @@ public class Assignment {
     public void generateRandomScores() {
         Random random = new Random();
 
-        for (int i = 0; i < scores.size(); i++) {
+        for (int j = 0; j < scores.size(); j++) {
             int range = random.nextInt(11);
             int generatedScore;
 
@@ -45,8 +50,8 @@ public class Assignment {
                 generatedScore = random.nextInt(90, 101);
             }
 
-            if (i < scores.size()) {
-                scores.set(i, generatedScore);
+            if (j < scores.size()) {
+                scores.set(j, generatedScore);
             }
         }
     }
