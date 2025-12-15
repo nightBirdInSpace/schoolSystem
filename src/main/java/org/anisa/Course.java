@@ -30,4 +30,22 @@ public class Course {
 
         return Math.abs(sumWeight - 100) < 0.001;
     }
+
+    public boolean registeredStudent(Student student) {
+        if (student == null || registeredStudents.contains(student)) {
+            return false;
+        }
+
+        registeredStudents.add(student);
+
+        for (Assignment assignment : assignments) {
+            assignment.getScores().add(null);
+        }
+
+        for (Assignment assignment : assignments) {
+            assignment.calcAssignmentAvg().add(null);
+        }
+
+        return true;
+    }
 }
